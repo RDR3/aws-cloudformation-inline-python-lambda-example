@@ -119,6 +119,7 @@ Resources:
             # Env variables from CFN
             tablename = os.environ.get('TableName')
             keyname = os.environ.get('KeyName')
+            password = 'password123'
 
             def lambda_handler(event, context):
                 # Generate a random string to ensure no duplicates are put into DDB table
