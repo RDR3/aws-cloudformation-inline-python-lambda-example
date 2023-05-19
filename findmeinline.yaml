@@ -1,4 +1,20 @@
-# Imports
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Description: Adds a random string value to the specified DynamoDB table
+      FunctionName: !Ref LambdaFunctionName
+      Handler: index.lambda_handler
+      MemorySize: 128
+      Runtime: python3.8
+      Role: !GetAtt 'LambdaRole.Arn'
+      Timeout: 240
+      Environment:
+        Variables:
+          TableName: !Ref DynamoDBTableName
+          KeyName: !Ref DynamoDBPKName
+      Code:
+        ZipFile: |
+            # Imports
             import os
             import boto3
             import botocore
