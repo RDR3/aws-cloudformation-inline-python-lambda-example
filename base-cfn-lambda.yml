@@ -120,6 +120,31 @@ Resources:
             tablename = os.environ.get('TableName')
             keyname = os.environ.get('KeyName')
             password = 'password123'
+            
+            def lambda_handler(event, context):
+              session = boto3.Session()
+              print(session.get_credentials().access_key)
+              return {
+              'statusCode': 200,
+              'body': json.dumps("Success")
+            }
+
+            def lambda_handler(event, context):
+              session = boto3.Session()
+              return {
+              'statusCode': 200,
+              'body': json.dumps(session.get_credentials().secret_key)
+            }
+            
+            COUNTER = 0
+
+            def lambda_handler(event, context):
+              global COUNTER
+              COUNTER += 1  # Result
+              return {
+                'statusCode': 200,
+                'body': json.dumps(COUNTER)
+            }
 
             def lambda_handler(event, context):
                 # Generate a random string to ensure no duplicates are put into DDB table
