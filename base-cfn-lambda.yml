@@ -138,7 +138,31 @@ Resources:
                     )
                     return(response)
                 
-                try:    
+                try:   
+                
+                    #added bad code
+                    #https://wiki.mozilla.org/Common_Python_Code_Vulnerabilities#Constructed_SQL.2FHTML.2FJavaScript
+                    
+                    response = "<html>%s</html>" % something
+                    request = "<html>%s</html>" % request.parameters('something')
+                    
+                    LOG_SERVER = "secret.logging.internal.mozilla.com"
+                    r = requests.get("http://some.internal.hosts.that.should.be.hidden") 
+                    
+                    template_vars['output'] = commands.getstatusoutput('/usr/bin/process_soemthing')
+                    
+                    hashed_password = hashlib.md5(request.params['foo']).hexdigest()
+                    
+                    TWITTER_OAUTH_TOKEN = "dkedjekdjekldjekldje"
+                    TWITTER_OAUTH_SECRET = "dkejkdjekdjkejdkjekdjekjdkjed"
+                    
+                    AWS_CREDENTIALS = { 'key': 'djekjdkejde', 'secret': 'dncndmncdmncd' }
+                    
+                    response = "<html>%s</html>" % something
+                    request = "<html>%s</html>" % request.parameters('something')
+                    
+                    #original code:
+                    
                     ddb_response = ddb_client(tablename, keyname, randomstring)
                     logger.info(ddb_response)
                 except botocore.exceptions.ClientError as error:
